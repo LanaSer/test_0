@@ -1,0 +1,73 @@
+---
+title: Документация по платформе GitVerse
+description: Документация GitVerse. Справка по всем функциям. Ответы на основные вопросы по работе на платформе. Поиск по документации и поддержка.
+---
+
+import {
+	Svg,
+	Grid,
+	BadgeNew,
+	BadgeUpdate,
+	BadgeBeta,
+	BadgeEP,
+} from "@/shared/ui";
+import { Footer } from "@/shared/ui/footer";
+import Link from "next/link";
+import Image from "next/image";
+import { Header } from "@/widgets";
+
+import {
+	IconUserCog,
+	IconMessages,
+	IconGitBranch,
+	IconBook2,
+	IconVocabulary,
+	IconLockOpen,
+	IconListDetails,
+	IconSettings,
+	IconSchool,
+	IconScale,
+	IconBox,
+	IconTags,
+	IconCreditCard,
+	IconHelp,
+	IconMailCheck,
+	IconLifebuoy,
+	IconRocket,
+	IconApi,
+	IconChartBar,
+} from "@tabler/icons-react";
+import { HomePageNavigation } from '@/shared/ui/home-page-navigation';
+
+export default function MainPage() {
+	return (
+			<main className="pb-12 px-6 max-w-[90rem] mx-auto">
+				<div className="flex items-center gap-4 py-10 md:py-16 lg:py-24">
+
+    				<div className="lg:m-auto lg:text-center">
+    					<h1 className="text-h1 md:text-h1-hero font-bold leading-none tracking mb-6 lg:mb-8">
+    						Документация
+    					</h1>
+    					<div className="flex">
+    						<div className="flex flex-col md:flex-row gap-3 lg:m-auto items-center">
+    							<Link
+    							 className="h-10 lg:h-12 items-center justify-center gap-2 whitespace-nowrap inline-flex rounded-8 shadow px-6 lg:px-8 bg-bl-60 text-gr-95 dark:bg-yl-60 dark:text-gr-25"
+    							 href="/gitverse/basics/quick-start/">Быстрый старт</Link>
+    							<a
+    								className={"h-10 lg:h-12 items-center justify-center gap-2 whitespace-nowrap inline-flex rounded-8 px-6 lg:px-8 text-gr-25 dark:text-gr-95"}
+    								href="mailto:support@gitverse.ru"
+    							>
+    								<IconMailCheck size={20} />Поддержка
+    							</a>
+    						</div>
+    					</div>
+
+    				</div>
+    			</div>
+
+				<HomePageNavigation/>
+    		</main>
+
+    );
+
+}
