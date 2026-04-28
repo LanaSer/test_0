@@ -1,0 +1,37 @@
+openapi: 3.0.0
+info:
+  title: Пример API для ReDoc
+  description: Это пример документации, сгенерированной с помощью ReDoc.
+  version: 1.0.0
+servers:
+  - url: https://example.com
+    description: Основной сервер
+paths:
+  /users:
+    get:
+      summary: Получить список пользователей
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    name:
+                      type: string
+                      example: "Иван Иванов"
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
