@@ -1,0 +1,69 @@
+stateDiagram-v2
+    direction TB
+
+    %% Определение состояний
+    state "Новый заказ" as New
+    state "Ожидает оплаты" as PendingPayment
+    state "Оплачен" as Paid
+    state "В обработке" as Processing
+    state "Отправлен" as Shipped
+    state "Доставлен" as Delivered
+    state "Отменен" as Cancelled
+    state "Возврат средств" as Refunded
+
+    %% Начальная точка
+    [*] --> New: Создание заказа
+
+    %% Переходы из состояния "Новый"
+    New --> PendingPayment: Подтверждение корзины
+    New --> Cancelled: Отмена пользователем
+
+    %% Переходы из состояния "Ожидает оплаты"
+    PendingPayment --> Paid: Оплата успешна [Деньги получены]
+    PendingPayment --> Cancelled: Таймаут оплаты
+    PendingPayment --> Cancelled: Отмена пользователем
+
+    %% Переходы из состояния "Оплачен"
+    Paid --> Processing: Подтверждение платежа менеджером
+    Paid --> Refunded: Запрос возврата (до отгрузки)
+
+    %% Переходы из состояния "В обработке"
+    Processing --> Shipped: Товар отгружен курьеру
+    Processing --> Refunded: Отмена складом
+
+    %% Переходы из состояния "Отправлен"
+    Shipped --> Delivered: Подпись клиента о получении
+    Shipped --> Refunded: Возврат при получении
+
+    %% Переходы из состояния "Доставлен"
+    Delivered --> Refunded: Гарантия/Возврат [В течение 14 дней]
+    Delivered --> [*]: Завершен успешно
+
+    %% Конечные состояния
+    Cancelled --> [*]
+    Refunded --> [*]
+
+    %% Примечания
+    note right of New
+      Заказ создан в системе,
+      резерв товаров установлен.
+    end note
+
+    note left of PendingPayment
+      Ожидание поступления
+      средств от клиента.
+    end note
+
+    note right of Delivered
+      Финальное успешное
+      состояние заказа.
+    end note
+
+    %% Стилизация (опционально, работает в некоторых рендерерах)
+    classDef success fill:#d4edda,stroke:#28a745,stroke-width:2px
+    classDef error fill:#f8d7da,stroke:#dc3545,stroke-width:2px
+    classDef process fill:#fff3cd,stroke:#ffc107,stroke-width:2px
+
+    class Delivered success
+    class Cancelled,Refunded error
+    class Processing,PendingPayment process
